@@ -21,4 +21,5 @@ fun main() {
         |Acceso: ${if(edad>18)"Permitido" else "Denegado"}
     """.trimMargin()
     println(tarjeta)
+    
 }

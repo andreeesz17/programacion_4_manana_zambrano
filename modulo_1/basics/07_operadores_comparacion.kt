@@ -1,3 +1,7 @@
+/**
+ * You can edit, run, and share this code.
+ * play.kotlinlang.org
+ */
 fun main() {
     
     //readline
@@ -11,7 +15,5 @@ fun main() {
     println("$numero1 < $numero2 : ${numero1<numero2}")
     println("$numero1 >= $numero2 : ${numero1>=numero2}")
     println("$numero1 <= $numero2 : ${numero1<=numero2}")
-    
-    
     
 }   
