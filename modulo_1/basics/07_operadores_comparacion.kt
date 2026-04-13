@@ -1,17 +1,15 @@
-fun main() {
-    
-    //readline
-    println("Operadores Comparacion ")
-	val numero1 = 10
-	val numero2 = 2
+// Online Kotlin compiler to run Kotlin program online
+// Print "Try programiz.pro" message
 
-    println("$numero1 == $numero2 : ${numero1==numero2}")
-    println("$numero1 != $numero2 : ${numero1!=numero2}")
-    println("$numero1 > $numero2 : ${numero1>numero2}")
-    println("$numero1 < $numero2 : ${numero1<numero2}")
-    println("$numero1 >= $numero2 : ${numero1>=numero2}")
-    println("$numero1 <= $numero2 : ${numero1<=numero2}")
-    
-    
-    
-}   
+fun main() {
+  println("Operadores de comparación")
+  val numero1 = 15
+  val numero2 = 10
+  println("$numero1==$numero2=${numero1==numero2}")
+  println("$numero1 .equals $numero2=${numero1.equals(numero2)}")
+  println("$numero1!=$numero2=${numero1!=numero2}")
+  println("$numero1>$numero2=${numero1>numero2}")
+  println("$numero1>=$numero2=${numero1>=numero2}")
+  println("$numero1<$numero2=${numero1<numero2}")
+  println("$numero1<=$numero2=${numero1<=numero2}")
+}
