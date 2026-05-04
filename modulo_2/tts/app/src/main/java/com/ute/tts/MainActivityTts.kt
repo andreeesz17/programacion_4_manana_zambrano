@@ -15,7 +15,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import java.util.Locale
 
-class MainActivity : AppCompatActivity(), OnInitListener {
+class MainActivityTts : AppCompatActivity(), OnInitListener {
     var tts: TextToSpeech? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
