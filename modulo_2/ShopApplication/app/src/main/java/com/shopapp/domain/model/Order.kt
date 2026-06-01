@@ -1,5 +1,6 @@
 package com.shopapp.domain.model
 
+
 enum class OrderStatus(val value: String, val label: String) {
     PENDING("pending", "Pendiente"),
     CONFIRMED("confirmed", "Confirmado"),
