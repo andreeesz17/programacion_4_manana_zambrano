@@ -44,4 +44,16 @@ interface UserApi {
     suspend fun uploadAvatar(
         @Part avatar: MultipartBody.Part,
     ): Response<UserDto>
+
+    // ── Notificaciones de staff ───────────────────────────────────────────────
+
+    /**
+     * Envía un correo personalizado o masivo.
+     * Requiere is_staff = true en el backend (IsAdminUser → 403 si no es staff).
+     * Backend: POST /api/emails/send/
+     */
+    @POST("emails/send/")
+    suspend fun sendNotification(
+        @Body body: SendNotificationDto,
+    ): Response<NotificationResultDto>
 }

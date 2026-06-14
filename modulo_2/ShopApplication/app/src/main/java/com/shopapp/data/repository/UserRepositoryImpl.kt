@@ -90,4 +90,19 @@ class UserRepositoryImpl @Inject constructor(
         if (response.isSuccessful) response.body()!!.toDomain()
         else error(response.errorBody()?.string() ?: "Error ${response.code()}")
     }
+
+    override suspend fun sendNotification(
+        subject: String,
+        message: String,
+        userId:  Int?,
+    ): Result<com.shopapp.domain.model.NotificationResult> =
+        runCatching {
+            val response = api.sendNotification(com.shopapp.data.remote.dto.SendNotificationDto(subject, message, userId))
+            if (response.isSuccessful) {
+                val dto = response.body() ?: error("Respuesta vacía del servidor")
+                com.shopapp.domain.model.NotificationResult(dto.detail, dto.sent, dto.failed)
+            } else {
+                error(response.errorBody()?.string() ?: "Error ${response.code()}")
+            }
+        }
 }

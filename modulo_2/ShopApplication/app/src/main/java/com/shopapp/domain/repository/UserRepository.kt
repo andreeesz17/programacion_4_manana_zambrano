@@ -20,4 +20,11 @@ interface UserRepository {
     suspend fun getStats(): Result<Map<String, Int>>
     suspend fun uploadAvatar(uri: Uri): Result<String>
     suspend fun getProfile(): Result<User>
+
+    // ── Notificaciones de staff ───────────────────────────────────────────────
+    suspend fun sendNotification(
+        subject: String,
+        message: String,
+        userId:  Int? = null,
+    ): Result<com.shopapp.domain.model.NotificationResult>
 }
