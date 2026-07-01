@@ -22,7 +22,7 @@ class PantallaServidores extends ConsumerWidget {
           ? const Center(child: Text('Sin servidores'))
           : ListView.separated(
               itemCount:        servidores.length,
-              separatorBuilder: (_, __) =>
+              separatorBuilder: (context, index) =>
                   const Divider(height: 1, indent: 72),
               itemBuilder: (context, i) {
                 final s = servidores[i];

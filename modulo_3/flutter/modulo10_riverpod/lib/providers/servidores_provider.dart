@@ -1,5 +1,6 @@
 // lib/providers/servidores_provider.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import '../models/servidor_ssh.dart';
 
 // NotifierProvider — estado complejo con métodos propios
@@ -34,3 +35,21 @@ final servidoresProvider =
     NotifierProvider<ServidoresNotifier, List<ServidorSSH>>(
   ServidoresNotifier.new,
 );
+
+// Filtro de búsqueda — estado primitivo
+final busquedaProvider = StateProvider<String>((ref) => '');
+
+// Provider DERIVADO — se recalcula cuando cualquiera de sus dependencias cambia
+final servidoresFiltradosProvider = Provider<List<ServidorSSH>>((ref) {
+  final todos    = ref.watch(servidoresProvider);
+  final busqueda = ref.watch(busquedaProvider);
+
+  if (busqueda.isEmpty) return todos;
+
+  final q = busqueda.toLowerCase();
+  return todos.where((s) =>
+      s.nombre.toLowerCase().contains(q) || s.ip.contains(q)
+  ).toList();
+  // Cuando 'servidoresProvider' o 'busquedaProvider' cambian,
+  // este provider se recalcula automáticamente.
+});
