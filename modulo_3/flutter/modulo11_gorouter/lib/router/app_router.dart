@@ -1,6 +1,7 @@
 // lib/router/app_router.dart
 import 'package:go_router/go_router.dart';
 import '../screens/pantalla_inicio.dart';
+import '../screens/pantalla_dashboard.dart';
 import '../screens/pantalla_servidores.dart';
 
 final appRouter = GoRouter(
@@ -16,6 +17,10 @@ final appRouter = GoRouter(
       path:    '/servidores',
       name:    'servidores',
       builder: (context, state) => const PantallaServidores(),
+    ),
+    GoRoute(
+      path:    '/dashboard',
+      builder: (context, state) => const PantallaDashboard(),
     ),
   ],
 );

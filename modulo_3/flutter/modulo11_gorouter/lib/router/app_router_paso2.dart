@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../screens/pantalla_inicio.dart';
+import '../screens/pantalla_dashboard.dart';
 import '../screens/pantalla_servidores.dart';
 import '../screens/pantalla_detalle.dart';
 import '../models/servidor_ssh.dart';
@@ -13,6 +14,10 @@ final appRouterPaso2 = GoRouter(
     GoRoute(
       path:    '/',
       builder: (context, state) => const PantallaInicio(),
+    ),
+    GoRoute(
+      path:    '/dashboard',
+      builder: (context, state) => const PantallaDashboard(),
     ),
     GoRoute(
       path:    '/servidores',

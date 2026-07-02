@@ -17,7 +17,7 @@ import 'router/app_router_paso5.dart';
 // │  4  Paso 4  ShellRoute + NavigationBar persistente              │
 // │  5  Paso 5  Guard redirect + login + Riverpod                   │
 // └──────────────────────────────────────────────────────────────────┘
-const int paso = 2;
+const int paso = 5;
 
 void main() => runApp(const ProviderScope(child: AppMonitoreo(paso: paso)));
 

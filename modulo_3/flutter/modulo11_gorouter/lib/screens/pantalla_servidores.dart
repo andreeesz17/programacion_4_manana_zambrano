@@ -18,9 +18,9 @@ class PantallaServidores extends StatelessWidget {
         foregroundColor: cs.onPrimaryContainer,
       ),
       body: ListView.builder(
-        itemCount: servidoresSimulados.length,
+        itemCount: servidores.length,
         itemBuilder: (context, i) {
-          final s = servidoresSimulados[i];
+          final s = servidores[i];
           return ListTile(
             leading: const Icon(Icons.dns),
             title: Text(s.nombre),

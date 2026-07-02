@@ -9,9 +9,10 @@ class ScaffoldConNav extends StatelessWidget {
   // Detecta la ruta activa para resaltar la tab correcta
   int _indiceActivo(BuildContext context) {
     final loc = GoRouterState.of(context).uri.path;
-    if (loc.startsWith('/metricas')) return 1;
-    if (loc.startsWith('/ajustes'))  return 2;
-    return 0; // /servidores
+    if (loc.startsWith('/servidores')) return 1;
+    if (loc.startsWith('/metricas'))   return 2;
+    if (loc.startsWith('/ajustes'))    return 3;
+    return 0; // /dashboard
   }
 
   @override
@@ -22,12 +23,17 @@ class ScaffoldConNav extends StatelessWidget {
         selectedIndex:         _indiceActivo(context),
         onDestinationSelected: (i) {
           switch (i) {
-            case 0: context.go('/servidores');
-            case 1: context.go('/metricas');
-            case 2: context.go('/ajustes');
+            case 0: context.go('/dashboard');
+            case 1: context.go('/servidores');
+            case 2: context.go('/metricas');
+            case 3: context.go('/ajustes');
           }
         },
         destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.dashboard_outlined), selectedIcon: Icon(Icons.dashboard),
+            label: 'Dashboard',
+          ),
           NavigationDestination(
             icon: Icon(Icons.dns_outlined), selectedIcon: Icon(Icons.dns),
             label: 'Servidores',
