@@ -124,11 +124,24 @@ class ProfileScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 24),
 
+              // Botón Admin — solo visible para staff
+              if (user?.isStaff == true) ...[
+                SizedBox(
+                  width:  double.infinity,
+                  height: 52,
+                  child:  ElevatedButton.icon(
+                    onPressed: () => context.go('/admin'),
+                    icon:  const Icon(Icons.admin_panel_settings_outlined),
+                    label: const Text('Panel Admin'),
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ],
+
               // Botón logout
               _LogoutButton(
                 onConfirm: () async {
                   await ref.read(authProvider.notifier).logout();
-                  if (context.mounted) context.go('/login');
                 },
               ),
               const SizedBox(height: 32),
