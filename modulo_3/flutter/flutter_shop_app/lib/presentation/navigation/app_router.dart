@@ -15,6 +15,7 @@ import '../screens/orders/orders_screen.dart';
 import '../screens/orders/order_detail_screen.dart';
 import '../screens/auth/profile_screen.dart';
 import '../screens/admin/dashboard_screen.dart';
+import '../screens/admin/categories_admin_screen.dart';
 import '../widgets/admin_shell.dart';
 import 'public_shell.dart';
 
@@ -104,11 +105,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         ),
       ),
       GoRoute(
-        path: '/admin/categories',
+        path:    '/admin/categories',
         builder: (_, state) => AdminShell(
           title:        'Categorías',
           currentRoute: state.matchedLocation,
-          child:        const _AdminPlaceholder('Categorías — M8'),
+          child:        const CategoriesAdminScreen(),
         ),
       ),
       GoRoute(
