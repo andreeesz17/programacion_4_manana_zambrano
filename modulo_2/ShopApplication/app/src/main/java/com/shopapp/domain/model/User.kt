@@ -1,6 +1,5 @@
 package com.shopapp.domain.model
 
-
 data class User(
     val id: Int,
     val username: String,
@@ -9,8 +8,9 @@ data class User(
     val lastName: String,
     val isStaff: Boolean,
     val isActive: Boolean,
-    val dateJoined: String,
+    val dateJoined: String? = null,
     val numOrders: Int,
+    val avatarUrl:  String? = null,
 )
 
 data class UserPayload(
