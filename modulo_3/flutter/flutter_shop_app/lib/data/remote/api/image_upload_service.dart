@@ -3,11 +3,12 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
 import '../../../core/config/app_config.dart';
+
+import '../../local/secure_storage.dart';
 
 /// Excepción lanzada cuando la subida falla.
 class ImageUploadException implements Exception {
@@ -20,17 +21,17 @@ class ImageUploadException implements Exception {
 
 /// Servicio para subir imágenes al API mediante multipart/form-data.
 class ImageUploadService {
-  ImageUploadService({FlutterSecureStorage? storage})
-      : _storage = storage ?? const FlutterSecureStorage();
+  ImageUploadService({SecureStorage? storage})
+      : _storage = storage ?? SecureStorage();
 
-  final FlutterSecureStorage _storage;
+  final SecureStorage _storage;
 
   // -------------------------------------------------------------------------
   // Privados
   // -------------------------------------------------------------------------
 
   Future<String?> _readToken() async {
-    return _storage.read(key: 'flutter_shop_app:access');
+    return _storage.getAccess();
   }
 
   Map<String, String> _authHeaders(String token) => {

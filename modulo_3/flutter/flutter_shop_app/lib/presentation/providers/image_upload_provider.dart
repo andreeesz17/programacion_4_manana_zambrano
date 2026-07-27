@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../data/local/secure_storage.dart';
 import '../../data/remote/api/image_upload_service.dart';
 
 // ---------------------------------------------------------------------------
@@ -62,8 +63,7 @@ class ImageUploadNotifier extends StateNotifier<ImageUploadState> {
   /// Muestra el bottom sheet de selección de fuente y devuelve el archivo.
   /// Devuelve null si el usuario cancela.
   Future<File?> _pickImage() async {
-    // Abrir galería por defecto (la fuente puede extenderse a cámara con
-    // un dialog previo si se desea).
+    print('DEBUG: Iniciando selección de imagen en la galería...');
     final picked = await _picker.pickImage(
       source: ImageSource.gallery,
       imageQuality: 90,     // Compresión leve para reducir tamaño
@@ -71,7 +71,11 @@ class ImageUploadNotifier extends StateNotifier<ImageUploadState> {
       maxHeight: 1920,
     );
 
-    if (picked == null) return null;
+    if (picked == null) {
+      print('DEBUG: La selección de imagen fue cancelada o retornó null');
+      return null;
+    }
+    print('DEBUG: Imagen seleccionada correctamente. Path: ${picked.path}');
     return File(picked.path);
   }
 
@@ -83,13 +87,18 @@ class ImageUploadNotifier extends StateNotifier<ImageUploadState> {
         return;
       }
 
+      print('DEBUG: Cambiando estado a ImageUploadLoading y subiendo archivo...');
       state = const ImageUploadLoading();
 
       final imageUrl = await upload(file);
+      print('DEBUG: Subida exitosa. URL recibida: $imageUrl');
       state = ImageUploadSuccess(imageUrl: imageUrl);
     } on ImageUploadException catch (e) {
+      print('DEBUG: Error esperado en la subida: ${e.message}');
       state = ImageUploadError(message: e.message);
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print('DEBUG: Error inesperado en la subida: $e');
+      print(stackTrace);
       state = ImageUploadError(
         message: 'Error inesperado: ${e.toString()}',
       );
@@ -128,5 +137,10 @@ class ImageUploadNotifier extends StateNotifier<ImageUploadState> {
 /// (p. ej. al navegar fuera de la pantalla).
 final imageUploadProvider =
     StateNotifierProvider.autoDispose<ImageUploadNotifier, ImageUploadState>(
-  (ref) => ImageUploadNotifier(),
+  (ref) {
+    final storage = ref.watch(secureStorageProvider);
+    return ImageUploadNotifier(
+      service: ImageUploadService(storage: storage),
+    );
+  },
 );

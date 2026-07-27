@@ -102,6 +102,18 @@ class _ProductFormSheetState extends ConsumerState<ProductFormSheet> {
     ref.listen<ImageUploadState>(imageUploadProvider, (_, next) {
       if (next is ImageUploadSuccess && next.imageUrl != null) {
         setState(() => _currentImageUrl = next.imageUrl);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Imagen de producto actualizada.')),
+        );
+        ref.read(imageUploadProvider.notifier).reset();
+      } else if (next is ImageUploadError) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(next.message),
+            backgroundColor: AppColors.error,
+          ),
+        );
+        ref.read(imageUploadProvider.notifier).reset();
       }
     });
     final isUploadingImage = ref.watch(imageUploadProvider) is ImageUploadLoading;
