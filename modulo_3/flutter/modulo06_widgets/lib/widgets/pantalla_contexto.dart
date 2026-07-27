@@ -33,7 +33,7 @@ class PantallaContexto extends StatelessWidget {
             items: [
               'Ancho:        ${tamanio.width.toStringAsFixed(0)} px',
               'Alto:         ${tamanio.height.toStringAsFixed(0)} px',
-              'Pixel ratio:  ${MediaQuery.devicePixelRatioOf(context).toStringAsFixed(3.0 as int)}',
+              'Pixel ratio:  ${MediaQuery.devicePixelRatioOf(context).toStringAsFixed(3)}',
               'Orientación:  ${MediaQuery.paddingOf(context).top}',
             ],
           ),
